@@ -3,6 +3,7 @@ package cgg.datajpamappings.springbootdatajpamappingproj.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import cgg.datajpamappings.springbootdatajpamappingproj.dao.ProductRepository;
 import cgg.datajpamappings.springbootdatajpamappingproj.dto.OrderRequest;
 import cgg.datajpamappings.springbootdatajpamappingproj.dto.OrderResponse;
 import cgg.datajpamappings.springbootdatajpamappingproj.entity.Customer;
+import cgg.datajpamappings.springbootdatajpamappingproj.entity.Product;
 
 @RestController
 public class OrderController {
@@ -38,5 +40,10 @@ public class OrderController {
     @GetMapping("/getjoininfo")
     public List<OrderResponse> getJoinInfo(){
       return customerRepository.getJoinInformation();
+    }
+
+    @GetMapping("/getProductsByPrice/{price}")
+    public List<Customer> findProductsByPrice(@PathVariable int price){
+        return this.customerRepository.findByProductsPrice(price);
     }
 }
