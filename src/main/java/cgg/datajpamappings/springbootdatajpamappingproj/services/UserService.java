@@ -1,8 +1,11 @@
 package cgg.datajpamappings.springbootdatajpamappingproj.services;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -71,4 +74,15 @@ public class UserService {
         return this.userRepository.findFirst1ByAge(age);
     }
 
+    public List<User> getAllUsers(int offset,int pageSize){
+        return this.userRepository.getUsersCustomQuery(PageRequest.of(offset, pageSize));
+    }
+    public List<User> getAllUsers1(String p,int offset,int pageSize){
+        return this.userRepository.getUsersNativeQuery(p,PageRequest.of(offset, pageSize));
+    }
+
+    @Transactional
+    public int updateUser(){
+      return this.userRepository.updateUser();
+    }
 }

@@ -46,4 +46,9 @@ public class StudentCourseController {
     public List<Course> getCourseByFee(@PathVariable double value){
         return courseRepository.findByFeeLessThan(value);
     }
+
+    @GetMapping("/")
+    public List<Student> getAllStudentsCourses(){
+        return this.studentRepository.getStudentsWithCourses();
+    }
 }

@@ -1,11 +1,16 @@
 package cgg.datajpamappings.springbootdatajpamappingproj.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cgg.datajpamappings.springbootdatajpamappingproj.entity.User;
@@ -64,5 +69,20 @@ public class UserController {
     @GetMapping("/getFewusers/{age}")
     public List<User> getFewUsers(@PathVariable int age){
         return this.userService.findFirstUser(age);
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers(@RequestParam("offset") int offset,@RequestParam("pageSize") int pageSize){
+        return this.userService.getAllUsers(offset,pageSize);
+    }
+    @GetMapping("/getAllUsers1/{p}/{offset}/{pageSize}")
+    public List<User> getAllUsers1(@PathVariable String p,@PathVariable int offset,@PathVariable int pageSize){
+        return this.userService.getAllUsers1(p,offset,pageSize);
+    }
+
+    @PutMapping("/update/")
+    public ResponseEntity<String> updatUser(){
+       int cnt=  this.userService.updateUser();
+       return new ResponseEntity<>("Count records update "+cnt,HttpStatus.OK);
     }
 }

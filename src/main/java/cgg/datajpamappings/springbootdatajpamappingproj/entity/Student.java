@@ -3,6 +3,7 @@ package cgg.datajpamappings.springbootdatajpamappingproj.entity;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -37,7 +38,8 @@ public class Student {
     private String dept;
 
     @ManyToMany(cascade = CascadeType.ALL)
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+// @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonManagedReference
     @JoinTable(name="student_course",
     joinColumns = {@JoinColumn(name="s_fk",referencedColumnName = "id")},
     inverseJoinColumns = {@JoinColumn(name="c_fk",referencedColumnName = "id")})

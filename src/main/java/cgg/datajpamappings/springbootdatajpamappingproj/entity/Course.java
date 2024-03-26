@@ -36,7 +36,8 @@ public class Course {
 
     @ManyToMany(mappedBy = "courses")
     // @JsonBackReference
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    // @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonBackReference
     private Set<Student> students;
 
 }
