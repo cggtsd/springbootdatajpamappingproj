@@ -23,14 +23,14 @@ public class ProductService {
         this.repo = repo;
     }
 
-    @PostConstruct
-    public void initDB(){
-       List<Product1> products= IntStream.rangeClosed(1, 200)
-        .mapToObj(i->new Product1("Product"+i,new Random().nextInt(100),new Random().nextInt(500000)))
-        .collect(Collectors.toList());
+    // @PostConstruct
+    // public void initDB(){
+    //    List<Product1> products= IntStream.rangeClosed(1, 200)
+    //     .mapToObj(i->new Product1("Product"+i,new Random().nextInt(100),new Random().nextInt(500000)))
+    //     .collect(Collectors.toList());
 
-        this.repo.saveAll(products);
-    }
+    //     this.repo.saveAll(products);
+    // }
 
     public Page<Product1> findProductsWithPaging(int offset,int pageSize){
         return this.repo.findAll(PageRequest.of(offset, pageSize));

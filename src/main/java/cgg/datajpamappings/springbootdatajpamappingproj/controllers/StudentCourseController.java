@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cgg.datajpamappings.springbootdatajpamappingproj.dao.CourseRepository;
 import cgg.datajpamappings.springbootdatajpamappingproj.dao.StudentRepository;
+import cgg.datajpamappings.springbootdatajpamappingproj.dto.StudentCourseDTO;
 import cgg.datajpamappings.springbootdatajpamappingproj.entity.Course;
 import cgg.datajpamappings.springbootdatajpamappingproj.entity.Student;
 
@@ -48,7 +49,11 @@ public class StudentCourseController {
     }
 
     @GetMapping("/")
-    public List<Student> getAllStudentsCourses(){
-        return this.studentRepository.getStudentsWithCourses();
+    public List<StudentCourseDTO> getAllStudentsCourses(){
+        
+      List<StudentCourseDTO> students= this.studentRepository.getStudentsWithCourses();
+    //   System.out.println(students.toString());
+      return students;
+
     }
 }
