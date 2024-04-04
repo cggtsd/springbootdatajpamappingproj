@@ -1,8 +1,12 @@
 package cgg.datajpamappings.springbootdatajpamappingproj.entity;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -14,6 +18,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.MapKey;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,12 +44,17 @@ public class Student {
     private int age;
     private String dept;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "students")
 // @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-@JsonManagedReference
-    @JoinTable(name="student_course",
-    joinColumns = {@JoinColumn(name="s_fk",referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name="c_fk",referencedColumnName = "id")})
-    private Set<Course> courses;
+// @JsonManagedReference
+    @JsonIgnore
+    // private Set<Course> courses=new HashSet<>();
+    private Map<String,Course> courses;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="student")
+    private List<Phone> phones;
+
+
 
 }
